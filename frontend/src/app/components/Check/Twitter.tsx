@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	faCheck,
 	faCheckDouble,
@@ -33,8 +35,7 @@ Get double rewards for the first month after launch if you're eligible
 	const postHref = `${twitterUrl}?text=${encodeURIComponent(text)}`;
 
 	const abx = useAccount();
-	if(abx.address)
-		console.log("abx from twitter", abx.address);
+	if (abx.address) console.log("abx from twitter", abx.address);
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();

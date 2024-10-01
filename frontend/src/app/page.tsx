@@ -1,19 +1,18 @@
 "use client";
 
-import Routing from "@/pages";
+import Home from "@/home/page";
 import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
-import { BrowserRouter } from "react-router-dom";
 
 function App(): JSX.Element {
 	return (
 		<MetaMaskUIProvider
 			sdkOptions={{
 				dappMetadata: {
-					name: "Example React UI Dapp",
+					name: "TweetBounty",
 					url:
 						typeof window !==
 						"undefined"
-							? window 
+							? window
 									.location
 									.href
 							: "",
@@ -21,9 +20,7 @@ function App(): JSX.Element {
 				infuraAPIKey: "https://infura.io/v3/c2277863d49b42909d1a6b452b4d2553",
 			}}
 		>
-			<BrowserRouter>
-				<Routing />
-			</BrowserRouter>
+			<Home />
 		</MetaMaskUIProvider>
 	);
 }

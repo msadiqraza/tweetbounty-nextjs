@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	MetaMaskButton,
 	useAccount,
@@ -5,7 +7,6 @@ import {
 	useSignMessage,
 } from "@metamask/sdk-react-ui";
 import React, { FC } from "react";
-
 
 const AppReady: FC = () => {
 	const {

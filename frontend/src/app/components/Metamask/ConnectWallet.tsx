@@ -2,24 +2,22 @@
 
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAccount } from "@metamask/sdk-react-ui";
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import App from "./Metamask";
 
 interface ConnectWalletProps {
 	isGoBack: boolean;
+	address: string;
 }
 
 export default function ConnectWallet({
 	isGoBack,
+	address,
 }: ConnectWalletProps): JSX.Element {
 	const [click, setClick] = useState(false);
 	const elementRef = useRef<HTMLDivElement>(null);
-	const navigate = useNavigate();
-
-	// Add functionality: dynamic address call to get address without clicking
-	const abx = useAccount();
+	const router = useRouter();
 
 	function formatAddress(
 		address: string | undefined
@@ -59,8 +57,8 @@ export default function ConnectWallet({
 					<button
 						className="p-5 flex flex-row justify-center items-center"
 						onClick={() =>
-							navigate(
-								"/"
+							router.push(
+								"/home"
 							)
 						}
 					>
@@ -82,12 +80,12 @@ export default function ConnectWallet({
 				)}
 			</div>
 
-			{abx.address ? (
+			{address ? (
 				<div className="p-5">
 					<button
 						onClick={() => {
 							handleCopyClick(
-								abx.address!
+								address!
 							);
 							setClick(
 								!click
@@ -97,7 +95,7 @@ export default function ConnectWallet({
 					>
 						<span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-lg bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
 							{formatAddress(
-								abx.address
+								address
 							)}
 						</span>
 					</button>
