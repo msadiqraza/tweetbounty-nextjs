@@ -7,10 +7,10 @@ import {
 	faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAccount } from "@metamask/sdk-react-ui";
 import { ChangeEvent, FormEvent, useState } from "react";
 import verify from "@/api/tweetVerification";
 import findUser from "@/api/userFind";
+import { useAccount } from "wagmi";
 
 interface TwitterProps {
 	isVerified: (verified: boolean) => void;
@@ -34,9 +34,6 @@ Get double rewards for the first month after launch if you're eligible
 @SkyEcosystem`;
 	const postHref = `${twitterUrl}?text=${encodeURIComponent(text)}`;
 
-	const abx = useAccount();
-	if (abx.address) console.log("abx from twitter", abx.address);
-
 	const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 		if (isFollowing) handleVerify(url);
@@ -52,13 +49,15 @@ Get double rewards for the first month after launch if you're eligible
 	const handleVerify = async (url: string): Promise<void> => {
 		console.log("url", url);
 		setIsProcessing(true);
+		const { address, isConnected } = useAccount();
+		let wallet;
 
-		let wallet = abx.address;
-		const username = extractUsername(url);
-
-		if (!wallet) {
-			wallet = "0x";
+		if (isConnected) {
+			wallet=`${address}`
 		}
+		else wallet = `0x`;
+
+		const username = extractUsername(url);
 
 		const result = await findUser(username || "", wallet);
 		setUserFound(result);

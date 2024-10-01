@@ -1,7 +1,7 @@
 import "@/style/globals.css";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import React from "react";
+import { Providers } from "@/Providers";
 
 export const metadata: Metadata = {
 	title: "TweetBounty",
@@ -15,7 +15,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	);
 }

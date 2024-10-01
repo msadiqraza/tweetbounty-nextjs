@@ -1,9 +1,9 @@
 "use client";
 
-import { useAccount } from "@metamask/sdk-react-ui";
 import React, { useEffect, useRef, useState } from "react";
 import findUser from "@/api/userFind";
-import App from "@/components/Metamask/Metamask";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 interface ConnectProps {
 	isVerified: boolean;
@@ -14,21 +14,19 @@ export default function Connect({ isVerified }: ConnectProps): JSX.Element {
 	const [processing, setProcessing] = useState(true);
 	const [problem, setProblem] = useState(false);
 	const elementRef = useRef<HTMLDivElement>(null);
-	const abx = useAccount();
 
-	const handleClickOutside = (event: MouseEvent): void => {
-		if (
-			elementRef.current &&
-			!elementRef.current.contains(event.target as Node)
-		) {
-			setClick(false);
-		}
-	};
+	const { address, isConnected } = useAccount();
+	let wallet;
+
+	if (isConnected) {
+		wallet = `${address}`;
+	} else wallet = `0x`;
+
 
 	const handleClick = async (): Promise<void> => {
-		console.log("handleClick abx", abx.address);
+		console.log("handleClick abx", address);
 
-		const userFound = await findUser("", `${abx.address}`);
+		const userFound = await findUser("", `${address}`);
 		if (userFound) {
 			console.log("work", problem);
 			setProblem(true);
@@ -39,21 +37,11 @@ export default function Connect({ isVerified }: ConnectProps): JSX.Element {
 			return;
 		}
 
-		// const response = await handleSendEth(abx.address, 0.01);
+		// const response = await handleSendEth(address, 0.01);
 		setProcessing(false);
 		console.log("response");
 	};
 
-	useEffect(() => {
-		document.addEventListener("mousedown", handleClickOutside);
-
-		return () => {
-			document.removeEventListener(
-				"mousedown",
-				handleClickOutside
-			);
-		};
-	}, []);
 
 	return (
 		<div
@@ -97,8 +85,8 @@ export default function Connect({ isVerified }: ConnectProps): JSX.Element {
 						ref={elementRef}
 						className="bg-[#F6F5F2] shadow-2xl rounded-lg absolute top-[40vh] left-[20vw] w-[60vw] h-[50vh] flex flex-col justify-center items-center"
 					>
-						<App />
-						{abx.address &&
+						<ConnectButton />
+						{isConnected &&
 							click && (
 								<button
 									onClick={

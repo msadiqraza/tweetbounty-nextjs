@@ -3,52 +3,28 @@
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import App from "./Metamask";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 interface ConnectWalletProps {
 	isGoBack: boolean;
-	address: string;
 }
 
 export default function ConnectWallet({
 	isGoBack,
-	address,
 }: ConnectWalletProps): JSX.Element {
-	const [click, setClick] = useState(false);
-	const elementRef = useRef<HTMLDivElement>(null);
+
 	const router = useRouter();
 
-	function formatAddress(
-		address: string | undefined
-	): string | undefined {
-		if (!address || address.length !== 42) return address; // 0x + 40 hex characters
-		return `${address.slice(0, 6)}...${address.slice(-4)}`;
-	}
-
-	const handleCopyClick = (textToCopy: string): void => {
-		navigator.clipboard.writeText(textToCopy);
-	};
-
-	const handleClickOutside = (event: MouseEvent): void => {
-		if (
-			elementRef.current &&
-			!elementRef.current.contains(event.target as Node)
-		) {
-			setClick(false);
-		}
-	};
-
-	// Set up event listener when component mounts
-	useEffect(() => {
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.removeEventListener(
-				"mousedown",
-				handleClickOutside
-			);
-		};
-	}, []);
+	const { address, isConnected } = useAccount();
+	if (address)
+		console.log(
+			"address:",
+			address,
+			"\n isConnected:",
+			isConnected
+		);
+	else console.log("not Connected");
 
 	return (
 		<div className="flex flex-row justify-between">
@@ -58,7 +34,7 @@ export default function ConnectWallet({
 						className="p-5 flex flex-row justify-center items-center"
 						onClick={() =>
 							router.push(
-								"/home"
+								"/"
 							)
 						}
 					>
@@ -80,7 +56,12 @@ export default function ConnectWallet({
 				)}
 			</div>
 
-			{address ? (
+			<div className="p-5">
+				<ConnectButton />
+			</div>
+
+			{/* Legacy code */}
+			{/* {address ? (
 				<div className="p-5">
 					<button
 						onClick={() => {
@@ -116,16 +97,16 @@ export default function ConnectWallet({
 						</span>
 					</button>
 				</div>
-			)}
+			)} */}
 
-			{click && (
+			{/* {click && (
 				<div
 					ref={elementRef}
 					className="bg-[#F6F5F2] shadow-xl absolute top-[25vh] left-[20vw] w-[60vw] h-[50vh] flex justify-center items-center rounded-lg"
 				>
 					<App />
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }
