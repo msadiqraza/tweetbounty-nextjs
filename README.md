@@ -1,6 +1,9 @@
+
+
 # TweetBounty
 
 TweetBounty is a web application that allows users to verify and scrape tweets from [X.com](https://x.com) (formerly Twitter) using Puppeteer and Playwright. This project is built using **Next.js** with both server-side and client-side functionalities, and deployed using Docker.
+
 
 ## Docker Image
 
@@ -10,6 +13,7 @@ The Docker image for this project is available on Docker Hub:
 docker.io/blackstardocker/tweetbounty:latest
 ```
 
+
 ## Deployment
 
 The application is deployed at the following address:
@@ -17,6 +21,7 @@ The application is deployed at the following address:
 ```text
 https://tweetbounty.onrender.com
 ```
+
 
 ## Table of Contents
 - [Features](#features)
@@ -28,9 +33,11 @@ https://tweetbounty.onrender.com
 - [Deployment](#deployment)
 - [License](#license)
 
+
 ## Project Summary
 
 TweetBounty enables users to scrape tweet content from X.com and verify its authenticity or relevance based on keywords. The project integrates with Web3 wallets for verification, using **wagmi** and **rainbowkit** libraries for wallet interactions. It is built with Next.js for full-stack capabilities and is containerized using Docker for easy deployment.
+
 
 ## Features
 
@@ -40,11 +47,13 @@ TweetBounty enables users to scrape tweet content from X.com and verify its auth
 - Responsive UI built with **React** and **Next.js**.
 - Dockerized for easy deployment.
 
+
 ## Requirements
 
 - **Node.js** v16.x or higher
 - **Docker** (if you want to build and deploy using Docker)
 - **Web3** wallet for interaction (if using wagmi or RainbowKit features)
+
 
 ## Setup
 
@@ -63,19 +72,21 @@ TweetBounty enables users to scrape tweet content from X.com and verify its auth
 
 3. Set up the necessary environment variables (see the next section).
 
+
 ## Environment Variables
 
 To run the project locally, you need to create a `.env` file in the root directory of the project with the following variables:
 
 ```env
-# .env
 INFURA_PROJECT_ID=https://sepolia.infura.io/v3/project_id
 SUPABASE_URL=https://__url__.supabase.co
 SUPABASE_PUBLIC_KEY=public_key
 
 ```
 
+
 ## Building and Running with Docker
+
 
 ### Building the Docker Image
 
@@ -93,6 +104,7 @@ If you prefer to build and run the application using Docker, follow these steps:
     docker run -p 3000:3000 your-dockerhub-username/tweetbounty
     ```
 
+
 ### Using Docker Compose (Optional)
 
 If you prefer to use Docker Compose, you can set it up using the `docker-compose.yml` provided:
@@ -103,7 +115,9 @@ If you prefer to use Docker Compose, you can set it up using the `docker-compose
     docker-compose up --build
     ```
 
+
 ## API Endpoints
+
 
 ### GET `/api/tweet`
 
@@ -117,6 +131,7 @@ Fetches and scrapes tweets from X.com.
 ```bash
 GET /api/tweet?message=https://x.com/someuser/status/123456789
 ```
+
 
 ### GET `/api/user`
 
@@ -132,6 +147,7 @@ Verifies the content of the tweet against a given keyword.
 GET /api/user?user='...'&&wallet='0x...'
 ```
 
+
 ### POST `/api/sendeth`
 
 Sends 0.01SepoliaETH transaction to the connected account.
@@ -141,6 +157,7 @@ Sends 0.01SepoliaETH transaction to the connected account.
 ```bash
 POST /api/sendeth
 ```
+
 
 ## Deployment
 
@@ -161,6 +178,7 @@ You can deploy this Dockerized application to cloud services like **Render**, **
 
 4. Set the appropriate environment variables.
 5. Deploy the application.
+
 
 ## License
 
