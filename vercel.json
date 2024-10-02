@@ -1,11 +1,9 @@
 {
 	"functions": {
-		"src/api/api/*.ts": {
+		"src/app/api/tweet/*": {
 			"runtime": "nodejs18.x",
+			"memory": 1024,
 			"maxDuration": 10
 		}
-	},
-	"env": {
-		"PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium-browser"
 	}
 }
