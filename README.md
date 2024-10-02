@@ -183,4 +183,3 @@ You can deploy this Dockerized application to cloud services like **Render**, **
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
