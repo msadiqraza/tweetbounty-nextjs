@@ -1,4 +1,3 @@
-```markdown
 # TweetBounty
 
 TweetBounty is a web application that allows users to verify and scrape tweets from [X.com](https://x.com) (formerly Twitter) using Puppeteer and Playwright. This project is built using **Next.js** with both server-side and client-side functionalities, and deployed using Docker.
