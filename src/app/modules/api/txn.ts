@@ -1,13 +1,12 @@
 import axios from "axios";
 
 const handleSendEth = async (
-	apiUrl: string,
 	recipient: string,
 	amount: number
 ): Promise<string | null> => {
 	try {
 		const response = await axios.post(
-			`${apiUrl}/send-eth`,
+			`/api/sendeth`,
 			{ recipient, amount },
 			{
 				headers: {

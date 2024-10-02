@@ -16,16 +16,6 @@ export default function ConnectWallet({
 
 	const router = useRouter();
 
-	const { address, isConnected } = useAccount();
-	if (address)
-		console.log(
-			"address:",
-			address,
-			"\n isConnected:",
-			isConnected
-		);
-	else console.log("not Connected");
-
 	return (
 		<div className="flex flex-row justify-between">
 			<div>

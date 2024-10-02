@@ -2,8 +2,10 @@ import axios from "axios";
 
 const findUser = async (username: string, wallet: string): Promise<number> => {
 	try {
+		console.log("inside user find")
+		
 		const response = await axios.get(
-			`http://localhost:5000/user/find?user=${encodeURIComponent(
+			`/api/user?user=${encodeURIComponent(
 				username
 			)}&wallet=${encodeURIComponent(wallet)}`
 		);

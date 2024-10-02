@@ -12,7 +12,7 @@ const findUser = async (username: string, wallet: string): Promise<boolean> => {
 			);
 
 		if (error) {
-			console.error(
+			console.log(
 				"Error fetching user:",
 				error.message
 			);
@@ -21,7 +21,7 @@ const findUser = async (username: string, wallet: string): Promise<boolean> => {
 
 		// Check if any users were found
 		if (data.length > 0) {
-			console.log("User found:", data);
+			console.log("User found:", data[0].created_at);
 			return true; // Return the first matched user
 		} else {
 			console.log(
@@ -30,7 +30,7 @@ const findUser = async (username: string, wallet: string): Promise<boolean> => {
 			return false; // No user found
 		}
 	} catch (error) {
-		console.error("Error during user search:", error);
+		console.log("Error during user search:", error);
 		return false;
 	}
 };

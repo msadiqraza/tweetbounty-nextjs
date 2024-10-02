@@ -7,7 +7,7 @@ async function insertUser(username: string, wallet: string): Promise<boolean> {
 		.select();
 
 	if (error) {
-		console.error("Error inserting data:", error.message);
+		console.log("Error inserting data:", error.message);
 		return false;
 	} else {
 		console.log("Data inserted successfully:", data);

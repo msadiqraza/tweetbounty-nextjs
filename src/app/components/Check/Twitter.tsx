@@ -1,5 +1,7 @@
 "use client";
 
+import verify from "@/modules/api/tweetVerification";
+import findUser from "@/modules/api/userFind";
 import {
 	faCheck,
 	faCheckDouble,
@@ -8,8 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, FormEvent, useState } from "react";
-import verify from "@/modules/api/tweetVerification";
-import findUser from "@/modules/api/userFind";
 import { useAccount } from "wagmi";
 
 interface TwitterProps {
@@ -17,11 +17,15 @@ interface TwitterProps {
 }
 
 export default function Twitter({ isVerified }: TwitterProps): JSX.Element {
-	const apiUrl = "https://sky-money.onrender.com/";
+	// const apiUrl = "https://sky-money.onrender.com/";
 
 	const [isFollowing, setIsFollowing] = useState(false);
 	const [isPost, setIsPost] = useState(false);
 	const [url, setUrl] = useState("");
+
+	const { address, isConnected } = useAccount();
+	// const address = '0x'
+	// const isConnected = true
 
 	const [userFound, setUserFound] = useState(0);
 	const [xVerify, setXVerify] = useState(0);
@@ -49,25 +53,23 @@ Get double rewards for the first month after launch if you're eligible
 	const handleVerify = async (url: string): Promise<void> => {
 		console.log("url", url);
 		setIsProcessing(true);
-		const { address, isConnected } = useAccount();
 		let wallet;
 
 		if (isConnected) {
-			wallet=`${address}`
-		}
-		else wallet = `0x`;
+			wallet = `${address}`;
+		} else wallet = `0x`;
 
 		const username = extractUsername(url);
 
 		const result = await findUser(username || "", wallet);
+		console.log("this is the result: ", result)
 		setUserFound(result);
 
-		if (!result) {
+		if (result==0 || result==1) {
 			try {
-				const verifyResult = await verify(
-					apiUrl,
-					url
-				);
+				console.log("inside verify");
+
+				const verifyResult = await verify(url);
 				console.log(
 					"verifyResult",
 					verifyResult

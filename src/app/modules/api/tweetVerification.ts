@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const verify = async (apiUrl: string, url: string): Promise<boolean | null> => {
+const verify = async ( url: string): Promise<boolean | null> => {
 	try {
-		console.log("api alive", apiUrl);
+		console.log("inside tweet endpoints")
+
 		const response = await axios.get(
-			`${apiUrl}tweet?message=${encodeURIComponent(
+			`/api/tweet?message=${encodeURIComponent(
 				url
 			)}`
 		);
