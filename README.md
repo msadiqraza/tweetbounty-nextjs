@@ -1,10 +1,23 @@
-Here’s a template for your `README.md` file for your project:
-
----
-
+```markdown
 # TweetBounty
 
 TweetBounty is a web application that allows users to verify and scrape tweets from [X.com](https://x.com) (formerly Twitter) using Puppeteer and Playwright. This project is built using **Next.js** with both server-side and client-side functionalities, and deployed using Docker.
+
+## Docker Image
+
+The Docker image for this project is available on Docker Hub:
+
+```text
+docker.io/blackstardocker/tweetbounty:latest
+```
+
+## Deployment
+
+The application is deployed at the following address:
+
+```text
+https://tweetbounty.onrender.com
+```
 
 ## Table of Contents
 - [Features](#features)
@@ -15,6 +28,10 @@ TweetBounty is a web application that allows users to verify and scrape tweets f
 - [API Endpoints](#api-endpoints)
 - [Deployment](#deployment)
 - [License](#license)
+
+## Project Summary
+
+TweetBounty enables users to scrape tweet content from X.com and verify its authenticity or relevance based on keywords. The project integrates with Web3 wallets for verification, using **wagmi** and **rainbowkit** libraries for wallet interactions. It is built with Next.js for full-stack capabilities and is containerized using Docker for easy deployment.
 
 ## Features
 
@@ -28,7 +45,6 @@ TweetBounty is a web application that allows users to verify and scrape tweets f
 
 - **Node.js** v16.x or higher
 - **Docker** (if you want to build and deploy using Docker)
-- **X.com** account and access token (for fetching dynamic content)
 - **Web3** wallet for interaction (if using wagmi or RainbowKit features)
 
 ## Setup
@@ -36,7 +52,7 @@ TweetBounty is a web application that allows users to verify and scrape tweets f
 1. Clone this repository:
 
     ```bash
-    git clone https://github.com/your-username/tweetbounty.git
+    git clone https://github.com/msadiqraza/tweetbounty-nextjs.git
     cd tweetbounty
     ```
 
@@ -54,10 +70,10 @@ To run the project locally, you need to create a `.env` file in the root directo
 
 ```env
 # .env
-NEXT_PUBLIC_API_KEY=your_api_key_here
-NEXT_PUBLIC_TWITTER_API_URL=https://api.x.com
-DATABASE_URL=mongodb://localhost:27017/tweetbounty
-WALLET_PROVIDER_URL=https://your-wallet-provider-url
+INFURA_PROJECT_ID=https://sepolia.infura.io/v3/project_id
+SUPABASE_URL=https://__url__.supabase.co
+SUPABASE_PUBLIC_KEY=public_key
+
 ```
 
 ## Building and Running with Docker
@@ -75,7 +91,7 @@ If you prefer to build and run the application using Docker, follow these steps:
 2. Run the Docker container:
 
     ```bash
-    docker run -p 3000:3000 --env-file .env your-dockerhub-username/tweetbounty
+    docker run -p 3000:3000 your-dockerhub-username/tweetbounty
     ```
 
 ### Using Docker Compose (Optional)
@@ -103,19 +119,28 @@ Fetches and scrapes tweets from X.com.
 GET /api/tweet?message=https://x.com/someuser/status/123456789
 ```
 
-### POST `/api/verify`
+### GET `/api/user`
 
 Verifies the content of the tweet against a given keyword.
 
 **Parameters**:
-- `url` (string): The URL of the tweet to verify.
+- `user` (string): The URL of the tweet to verify.
 - `wallet` (string): The wallet address for verification purposes.
 
 **Example**:
 
 ```bash
-POST /api/verify
-Body: { "url": "https://x.com/someuser/status/123456789", "wallet": "0x..." }
+GET /api/user?user='...'&&wallet='0x...'
+```
+
+### POST `/api/sendeth`
+
+Sends 0.01SepoliaETH transaction to the connected account.
+
+**Example**:
+
+```bash
+POST /api/sendeth
 ```
 
 ## Deployment
@@ -125,14 +150,14 @@ You can deploy this Dockerized application to cloud services like **Render**, **
 1. Push your Docker image to Docker Hub:
 
     ```bash
-    docker push your-dockerhub-username/tweetbounty:latest
+    docker push blackstardocker/tweetbounty:latest
     ```
 
 2. Log into Render and create a new **Web Service**.
 3. In the **Deploy from Docker** section, enter your Docker Hub image URL:
 
     ```text
-    your-dockerhub-username/tweetbounty:latest
+    blackstardocker/tweetbounty:latest
     ```
 
 4. Set the appropriate environment variables.
@@ -141,7 +166,4 @@ You can deploy this Dockerized application to cloud services like **Render**, **
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-You can modify this as needed, especially in the **API Endpoints** and **Environment Variables** sections based on your specific project setup.
+```
