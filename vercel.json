@@ -1,3 +1,8 @@
 {
-
+	"functions": {
+		"src/app/api/tweet/*": {
+			"memory": 1024,
+			"maxDuration": 10
+		}
+	}
 }
