@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import findUser from "@/api/userFind";
+import findUser from "@/modules/api/userFind";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useRef, useState } from "react";
 import { useAccount } from "wagmi";
 
 interface ConnectProps {
@@ -22,7 +22,6 @@ export default function Connect({ isVerified }: ConnectProps): JSX.Element {
 		wallet = `${address}`;
 	} else wallet = `0x`;
 
-
 	const handleClick = async (): Promise<void> => {
 		console.log("handleClick abx", address);
 
@@ -41,7 +40,6 @@ export default function Connect({ isVerified }: ConnectProps): JSX.Element {
 		setProcessing(false);
 		console.log("response");
 	};
-
 
 	return (
 		<div

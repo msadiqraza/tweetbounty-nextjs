@@ -8,8 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, FormEvent, useState } from "react";
-import verify from "@/api/tweetVerification";
-import findUser from "@/api/userFind";
+import verify from "@/modules/api/tweetVerification";
+import findUser from "@/modules/api/userFind";
 import { useAccount } from "wagmi";
 
 interface TwitterProps {
