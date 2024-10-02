@@ -10,6 +10,8 @@ COPY package-lock.json ./
 # Install dependencies
 RUN npm install
 
+RUN npx playwright install
+
 # Install Playwright dependencies
 RUN npx playwright install-deps
 
