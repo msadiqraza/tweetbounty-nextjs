@@ -1,7 +1,6 @@
 {
 	"functions": {
 		"src/app/api/tweet/*": {
-			"runtime": "nodejs18",
 			"memory": 1024,
 			"maxDuration": 10
 		}
