@@ -1,0 +1,11 @@
+{
+	"functions": {
+		"src/api/api/*.ts": {
+			"runtime": "nodejs18.x",
+			"maxDuration": 10
+		}
+	},
+	"env": {
+		"PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium-browser"
+	}
+}
