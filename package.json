@@ -7,7 +7,9 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"postinstall": "npx playwright install"
+		"postinstall": "npx playwright install",
+		"install-deps": "npx playwright install-deps",
+		"install": "npm run postinstall && npm run install-deps"
 	},
 	"dependencies": {
 		"@fortawesome/free-solid-svg-icons": "^6.6.0",
